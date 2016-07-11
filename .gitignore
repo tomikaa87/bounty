@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BountyHunt/Debug
+/BountyHunt/Release
+*.VC.opendb
+*.VC.db
+*.user
+*.suo
