@@ -15,7 +15,7 @@ struct test_data
 TEST(NonNullTests, AssertIfNotPointer)
 {
     // This won't compile since 'int' is not a pointer type
-    //bounty::non_null<int> test{ 5 };
+    bounty::non_null<int> test{ 5 };
 }
 
 TEST(NonNullTests, RawPointer_MemberAccess)
@@ -76,7 +76,9 @@ TEST(NonNullTests, RawPointer_NullptrTAssign)
 TEST(NonNullTests, RawPointer_IndirectNullptrInit)
 {
     int *a = nullptr;
-    EXPECT_DEATH(bounty::non_null<int*>{ a }, "Assertion failed: ptr");
+
+    // This won't compile
+    //bounty::non_null<int*>{ a };
 }
 
 int main(int argc, char** argv)

@@ -10,19 +10,11 @@ namespace bounty
 template <class PtrType>
 struct non_null
 {
-    template <typename = std::enable_if<std::is_pointer<PtrType>::value>::type>
     non_null(PtrType ptr)
         : m_ptr(ptr)
     {
-        static_assert(std::is_pointer<PtrType>::value, "Template argument must be pointer type");
-        assert(ptr);
-    }
-
-    template <class T, typename = std::enable_if<!std::is_pointer<PtrType>::value>::type>
-    non_null(std::shared_ptr<T> ptr)
-        : m_ptr(ptr)
-    {
-        assert(ptr);
+        static_assert(std::is_assignable<PtrType, nullptr_t>::value, "Template argument must be a pointer type");
+        static_assert(!std::is_null_pointer<PtrType>::value, "Template argument must not be nullptr");
     }
 
     non_null(nullptr_t) = delete;
