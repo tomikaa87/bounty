@@ -32,5 +32,8 @@
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc">
       <Filter>googlemock</Filter>
     </ClCompile>
+    <ClCompile Include="NonNullTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,3 +1,9 @@
+//
+// Type wrapper that ensures the contained pointer won't be nullptr
+//
+// Created by Tamas Karpati on 2016-07-12.
+//
+
 #pragma once
 
 #include <cassert>
@@ -7,51 +13,71 @@
 namespace bounty
 {
 
-template <class PtrType>
+template <class T>
 struct non_null
 {
-    non_null(PtrType ptr)
+    constexpr explicit non_null(const T& ptr)
         : m_ptr(ptr)
     {
-        static_assert(std::is_assignable<PtrType, nullptr_t>::value, "Template argument must be a pointer type");
-        static_assert(!std::is_null_pointer<PtrType>::value, "Template argument must not be nullptr");
+        static_assert(!std::is_null_pointer<T>::value, "Template argument must not be nullptr");
+        assert(ptr != nullptr);
     }
 
-    non_null(nullptr_t) = delete;
+    constexpr explicit non_null(const T&& ptr)
+        : m_ptr(ptr)
+    {
+        static_assert(!std::is_null_pointer<T>::value, "Template argument must not be nullptr");
+        assert(ptr != nullptr);
+    }
 
-    void operator=(nullptr_t) = delete;
+    non_null(const nullptr_t&) = delete;
+    non_null(int) = delete;
 
-    void operator=(const PtrType& o)
+    non_null(const non_null&) = default;
+    non_null(non_null&&) = default;
+
+    non_null& operator=(const nullptr_t&) = delete;
+    non_null& operator=(int) = delete;
+
+    non_null& operator=(const T& o)
     {
         assert(o);
         m_ptr = o;
+        return *this;
     }
 
-    void operator=(PtrType&& o)
+    non_null& operator=(T&& o)
     {
         assert(o);
         m_ptr = std::move(o);
+        return *this;
     }
 
-    template <class T>
-    void operator=(std::shared_ptr<T> o)
-    {
-        assert(o);
-        m_ptr = o;
-    }
+    //template <class T>
+    //non_null& operator=(const std::shared_ptr<T>& o)
+    //{
+    //    assert(!o.);
+    //    m_ptr = o;
+    //    return *this;
+    //}
 
-    auto operator*() const
-    {
-        return *m_ptr;
-    }
-
-    auto operator->()
+    constexpr auto operator->() const
     {
         return m_ptr;
     }
 
+    constexpr operator T() const
+    {
+        return m_ptr;
+    }
+
+    constexpr auto operator*() const
+    {
+        return *m_ptr;
+    }
+
 private:
-    PtrType m_ptr;
+    T m_ptr;
 };
 
 }
