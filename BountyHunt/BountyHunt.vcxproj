@@ -112,6 +112,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Make.h" />
     <ClInclude Include="NonNull.h" />
     <ClInclude Include="VariadicSum.h" />
   </ItemGroup>
@@ -119,6 +120,7 @@
     <ClCompile Include="..\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MakeTests.cpp" />
     <ClCompile Include="NonNullTests.cpp" />
     <ClCompile Include="VariadicSumTests.cpp" />
   </ItemGroup>
