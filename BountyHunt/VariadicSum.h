@@ -18,9 +18,9 @@ constexpr auto variadic_sum(T&& n, Args&&... args)
 }
 
 template <typename T>
-constexpr auto variadic_sum(T&& n)
+constexpr decltype(auto) variadic_sum(T&& n)
 {
-    return n;
+    return std::forward<T>(n);
 }
 
 }
