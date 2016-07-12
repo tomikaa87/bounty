@@ -53,14 +53,6 @@ struct non_null
         return *this;
     }
 
-    //template <class T>
-    //non_null& operator=(const std::shared_ptr<T>& o)
-    //{
-    //    assert(!o.);
-    //    m_ptr = o;
-    //    return *this;
-    //}
-
     constexpr auto operator->() const
     {
         return m_ptr;
