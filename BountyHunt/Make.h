@@ -12,7 +12,7 @@ namespace bounty
 {
 
 template <typename T, typename... Args>
-constexpr decltype(auto) make(Args&&... args)
+constexpr auto make(Args&&... args)
 {
     return T{ std::forward<Args>(args)... };
 }

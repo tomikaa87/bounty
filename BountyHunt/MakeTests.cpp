@@ -8,6 +8,8 @@
 struct test_data
 {
     test_data() = default;
+    test_data(const test_data&) = delete;
+    test_data(test_data&&) = default;
 
     explicit test_data(int a)
         : sum(a)
