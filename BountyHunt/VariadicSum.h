@@ -12,15 +12,14 @@ namespace bounty
 {
 
 template <typename T, typename... Args>
-constexpr auto variadic_sum(T n, Args... args)
+constexpr auto variadic_sum(T&& n, Args&&... args)
 {
-    return n + variadic_sum(args...);
+    return n + variadic_sum(std::forward<Args>(args)...);
 }
 
 template <typename T>
-constexpr auto variadic_sum(T n)
+constexpr auto variadic_sum(T&& n)
 {
-    static_assert(std::is_arithmetic<T>::value, "Only integral types can be used.");
     return n;
 }
 

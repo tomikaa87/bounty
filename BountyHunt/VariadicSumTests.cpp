@@ -39,3 +39,32 @@ TEST(VariadicSumTests, AddBool)
 {
     EXPECT_EQ(2, bounty::variadic_sum(1, true));
 }
+
+TEST(VariadicSumTests, AddStruct)
+{
+    struct test_data
+    {
+        test_data& operator+(const test_data& rhs)
+        {
+            sum += rhs.sum;
+            return *this;
+        }
+
+        test_data& operator+(int rhs)
+        {
+            sum += rhs;
+            return *this;
+        }
+
+        operator int() const
+        {
+            return sum;
+        }
+
+        int sum = 0;
+    } test;
+
+    test.sum = 10;
+
+    EXPECT_EQ(11, bounty::variadic_sum(test, 1));
+}
