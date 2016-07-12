@@ -113,12 +113,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NonNull.h" />
+    <ClInclude Include="VariadicSum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NonNullTests.cpp" />
+    <ClCompile Include="VariadicSumTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
